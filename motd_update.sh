@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# Modifica el fichero /etc/motd, el cual veremos al hacer login por consola.
+# + Info en: https://wiki.debian.org/motd#How_to_update_your_.2Fetc.2Fmotd
+
 IP=`ip addr show scope global | grep inet | cut -d' ' -f6 | cut -d/ -f1`
 UP=`uptime | awk -F"up " '{print $2}' | awk -F"," '{print $1}'`
 USED=`df -h | grep 'dev/sda1' | awk '{print $3}'`
