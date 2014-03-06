@@ -3,14 +3,14 @@
 # Modifica el fichero /etc/motd, el cual veremos al hacer login por consola.
 # + Info en: https://wiki.debian.org/motd#How_to_update_your_.2Fetc.2Fmotd
 
-IP=`ip addr show scope global | grep inet | cut -d' ' -f6 | cut -d/ -f1`
-UP=`uptime | awk -F"up " '{print $2}' | awk -F"," '{print $1}'`
-USED=`df -h | grep 'dev/sda1' | awk '{print $3}'`
-AVAIL=`df -h | grep 'dev/sda1' | awk '{print $4}'`
-MIP=`/usr/bin/curl icanhazip.com 2>/dev/null`
+IP=`ip addr show scope global | grep inet | cut -d' ' -f6 | cut -d/ -f1` # IP privada
+UP=`uptime | awk -F"up " '{print $2}' | awk -F"," '{print $1}'` # Tiempo online
+USED=`df -h | grep 'dev/sda1' | awk '{print $3}'` # Espacio usado en disco
+AVAIL=`df -h | grep 'dev/sda1' | awk '{print $4}'` # Espacio libre en disco
+MIP=`/usr/bin/curl icanhazip.com 2>/dev/null` # IP Publica
 TEMP=`cat /sys/class/thermal/thermal_zone0/temp`
 TEMP2=`expr $TEMP / 1000` # Temperatura en grados
-DATE=`date +"%A, %e %B %Y, %r"`
+DATE=`date +"%A, %e %B %Y, %r"` # Fecha
 
 echo "\033[1;32m
     .~~.   .~~.
