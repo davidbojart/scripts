@@ -1,0 +1,47 @@
+#!/bin/bash
+####################################################################################
+# File Name  : amule_add_links.bash
+# Author     : David Bojart
+# Date       : 20140924
+# Update     : dom 28 sep 2014 23:02:17 CEST
+# Explanation: Aniade enlaces de forma masiva al amule.
+# Update by  : David Bojart
+####################################################################################
+
+# Variables
+ROJO="\033[0;31m"
+VERDE="\033[0;32m"
+BLANCO="\033[1;37m"
+NORMAL="\033[0m"
+FILE_LINKS=/ruta_archivo_de_texto_enlaces/
+AMULE_SERVER="99.123.99.123:1234" # Tu serividor amule favorito
+AMULE_STATUS=`ps -ef | grep '/usr/bin/amuled -f' | grep -v grep`
+
+if [ "$AMULE_STATUS" == "" ] ; then
+        echo "El servicio de Amule no esta arrancado, ¿Deseas arrancarlo?"
+        echo -e "YES/NO"
+        read RESPUESTA
+        case $RESPUESTA in
+                yes|YES)
+                        /etc/init.d/amule-daemon start
+                        echo "connect $AMULE_SERVER" | amulecmd >/dev/null 2>&1 ;;
+                no|no)
+                        exit ;;
+                *) exit ;;
+        esac
+fi
+
+vi $FILE_LINKS
+
+   for I in `cat $FILE_LINKS` ; do
+        ADD_LINKS=`echo "add $I" | amulecmd | tail -n 3 | head -n 1 | awk '{ print $2,$3 }'`
+        LINK_NAME=`echo $I | awk -F "|" '{ print $3 }' | sed 's/\%20/ /g'`
+        if [ "$STATUS" == "Solicitud fallida" ] ; then
+                echo -e "$BLANCO $LINK_NAME $NORMAL"
+                echo -e "$ROJO $ADD_LINKS $NORMAL\n"
+        else
+                echo -e "$BLANCO $LINK_NAME $NORMAL"
+                echo -e "$VERDE $ADD_LINKS $NORMAL\n"
+        fi
+
+   done
