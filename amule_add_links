@@ -14,7 +14,7 @@ VERDE="\033[0;32m"
 BLANCO="\033[1;37m"
 NORMAL="\033[0m"
 FILE_LINKS=/ruta_archivo_de_texto_enlaces/
-AMULE_SERVER="99.123.99.123:1234" # Tu serividor amule favorito
+AMULE_SERVER="99.123.99.123:1234" # Tu servidor amule favorito
 AMULE_STATUS=`ps -ef | grep '/usr/bin/amuled -f' | grep -v grep`
 
 if [ "$AMULE_STATUS" == "" ] ; then
