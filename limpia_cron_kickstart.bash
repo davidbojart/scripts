@@ -1,4 +1,12 @@
 #!/bin/bash
+####################################################################################
+# File Name  : limpia_cron_kickstart.bash
+# Author     : David Bojart
+# Date       : 20141001
+# Explanation: Comprueba si el envio de kickstart o los DVD's de Red-Hat esta corriendo o ha finalizado a las 7:00
+#	       Sino ha finalizado, para el proceso y programa de nuevo el envio a las 22:00
+#
+####################################################################################
 SEDE=$1
 PROCESO_PREPARE=`ps -ef | grep -v grep | grep -i "prepare6.sh $SEDE" | awk '{print $2}'`
 PROCESO_BUNDLES=`ps -ef | grep -v grep | grep -i "transfer_bundles6.sh $SEDE" | awk '{print $2}'`
